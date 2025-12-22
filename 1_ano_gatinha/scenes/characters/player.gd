@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
 var direction: Vector2
+var last_direction: Vector2
 var speed := 50
 var can_move: bool = true
 @onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var tool_state_machine = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
-var current_tool: Enum.Tool
+var current_tool: Enum.Tool = Enum.Tool.WATER
 var current_seed: Enum.Seed
+
+signal tool_use(tool: Enum.Tool, pos: Vector2)
 
 
 func _physics_process(delta: float) -> void:
@@ -14,6 +17,8 @@ func _physics_process(delta: float) -> void:
 		get_basic_input()
 		move()
 		animate()
+	if direction:
+		last_direction = direction
 
 func move():
 	direction = Input.get_vector("left","right","up","down")
@@ -46,7 +51,7 @@ func get_basic_input():
 		$Animation/AnimationTree.set("parameters/ToolOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func tool_use_emit():
-	print('tool')
+	tool_use.emit(current_tool, position + last_direction * 16 + Vector2(0,4))
 
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
