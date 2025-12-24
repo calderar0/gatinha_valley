@@ -3,6 +3,8 @@ extends Node2D
 var plant_scene = preload("res://scenes/objects/plant.tscn")
 var used_cells: Array[Vector2i]
 @onready var player = $Objects/Player
+@onready var daytransition_material = $Overlay/CanvasLayer/DayTransitionLayer.material
+@export var daytime_color: Gradient
 
 func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 	var grid_coord: Vector2i = Vector2i(int(pos.x / Data.TILE_SIZE), int(pos.y / Data.TILE_SIZE))
@@ -39,3 +41,23 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 			
 		#Enum.Tool.SWORD:
 			#pass
+
+func _process(delta: float) -> void:
+	var daytimer_point = 1 - $Timers/DayLenghtTimer.time_left / $Timers/DayLenghtTimer.wait_time
+	var color = daytime_color.sample(daytimer_point)
+	$Overlay/DaytimeColor.color = color
+	if Input.is_action_just_pressed('day_change'):
+		day_restart()
+
+func day_restart():
+	var tween = create_tween()
+	tween.tween_property(daytransition_material, 'shader_parameter/progress', 1.0, 1.0)
+	tween.tween_interval(0.5)
+	tween.tween_callback(level_reset)
+	tween.tween_property(daytransition_material, 'shader_parameter/progress', 0.0, 1.0)
+
+func level_reset():
+	$Timers/DayLenghtTimer.start()
+	for object in get_tree().get_nodes_in_group('Objects'):
+		if 'reset' in object:
+			object.reset()

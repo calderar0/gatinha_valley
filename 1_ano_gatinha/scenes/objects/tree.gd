@@ -12,7 +12,7 @@ var health := 3:
 			$CollisionShape2D.position.y = 8
 
 func _ready() -> void:
-	create_apple(3)
+	create_apple(randi_range(0,2))
 
 func hit(tool: Enum.Tool):
 	if tool == Enum.Tool.AXE:
@@ -33,3 +33,8 @@ func create_apple(num: int):
 func get_apple():
 	if $Apples.get_children():
 		$Apples.get_children().pick_random().queue_free()
+
+func reset():
+	for apple in $Apples.get_children():
+		apple.queue_free()
+	create_apple(randi_range(0,2))
