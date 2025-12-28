@@ -26,7 +26,7 @@ const PLANT_DATA = {
 		'death_max': 2,
 		'reward': Enum.Item.CORN},
 	Enum.Seed.PUMPKIN: {
-		'texture': "res://graphics/plants/tomato.png",
+		'texture': "res://graphics/plants/pumpkin.png",
 		'icon_texture': "res://graphics/icons/pumpkin.png",
 		'name':'Pumpkin',
 		'h_frames': 3,
@@ -34,7 +34,7 @@ const PLANT_DATA = {
 		'death_max': 3,
 		'reward': Enum.Item.PUMPKIN},
 	Enum.Seed.WHEAT: {
-		'texture': "res://graphics/plants/tomato.png",
+		'texture': "res://graphics/plants/wheat.png",
 		'icon_texture': "res://graphics/icons/wheat.png",
 		'name':'Wheat',
 		'h_frames': 3,
