@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=31 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Texture2D" uid="uid://b1cmu3aai85qc" path="res://graphics/tilesets/grass.png" id="1_bovvr"]
 [ext_resource type="Script" uid="uid://bheyo56ui8u8w" path="res://scenes/levels/level.gd" id="1_urvlt"]
@@ -8,10 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://vrdy2gp08qay" path="res://graphics/tilesets/soil_water.png" id="5_d4w6o"]
 [ext_resource type="Texture2D" uid="uid://qbjxaojv076j" path="res://graphics/tilesets/path.png" id="6_xfk5q"]
 [ext_resource type="PackedScene" uid="uid://cd5hhgu86v28o" path="res://scenes/objects/tree.tscn" id="7_mbbpy"]
+[ext_resource type="Texture2D" uid="uid://lgw5hjy4jrx0" path="res://graphics/weather/floor.png" id="7_qogh7"]
 [ext_resource type="PackedScene" uid="uid://dwrvr2r4yj2uv" path="res://scenes/objects/simple_object.tscn" id="8_ouxo3"]
 [ext_resource type="Shader" uid="uid://hif8tdkl01o7" path="res://shaders/circle_transition.gdshader" id="9_icy5c"]
 [ext_resource type="PackedScene" uid="uid://cow322nbf0pe8" path="res://scenes/ui/plant_info_container.tscn" id="10_rmjfq"]
 [ext_resource type="Texture2D" uid="uid://bowbojybd5iqc" path="res://graphics/opera_72h0byNdwa.png" id="12_qogh7"]
+[ext_resource type="Texture2D" uid="uid://da1u0rhfjt8a3" path="res://graphics/weather/drops.png" id="13_8iyoh"]
 
 [sub_resource type="Gradient" id="Gradient_ouxo3"]
 offsets = PackedFloat32Array(0, 0.28709677, 0.47419354, 0.9806452, 1)
@@ -1248,13 +1250,46 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_8iyoh")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8iyoh"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mq31s"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2250, 1000, 1)
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.39999998
+anim_speed_max = 2.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_icy5c"]
 shader = ExtResource("9_icy5c")
 shader_parameter/progress = 0.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mq31s"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5mi6g"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2250, 1000, 1)
+direction = Vector3(-1, 1, 0)
+spread = 5.0
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.39999998
+anim_speed_max = 2.0
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_urvlt")
 daytime_color = SubResource("Gradient_ouxo3")
+rain_color = Color(0.8156863, 0.8156863, 0.8156863, 1)
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -1283,6 +1318,14 @@ light_mask = 0
 position = Vector2(1454, 117)
 tile_map_data = PackedByteArray("AAD2/w8AAAACAAEAAAD2/xAAAAACAAEAAAD2/xEAAAACAAEAAAD2/xIAAAACAAEAAAD1/w8AAAAAAAEAAAD1/xAAAAAAAAEAAAD1/xEAAAAAAAEAAAD1/xIAAAAAAAEAAAD1/xMAAAAAAAEAAAD2/w4AAAACAAEAAAD2/w0AAAACAAEAAAD2/wwAAAACAAEAAAD2/wsAAAAFAAQAAAD2/woAAAACAAEAAAD2/wkAAAACAAEAAAD2/wgAAAAFAAEAAAD2/wcAAAAFAAIAAAD2/wYAAAACAAEAAAD2/wUAAAACAAAAAAD1/wQAAAADAAAAAAD1/wUAAAAEAAIAAAD1/wYAAAAAAAEAAAD1/wcAAAAAAAEAAAD1/wgAAAAAAAEAAAD1/wkAAAAAAAEAAAD1/woAAAAAAAEAAAD1/wsAAAAAAAEAAAD1/wwAAAAAAAEAAAD1/w0AAAAAAAEAAAD1/w4AAAAAAAEAAAD3/wcAAAACAAAAAAD4/wkAAAADAAEAAAD4/woAAAADAAEAAAD3/wgAAAAFAAMAAAD4/wgAAAAHAAAAAAD4/wsAAAAHAAEAAAD3/wsAAAABAAMAAAD2/xQAAAAFAAEAAAD1/xQAAAAAAAEAAAD4/xEAAAADAAEAAAD4/xAAAAAEAAAAAAD5/w8AAAADAAEAAAD5/xAAAAAHAAMAAAD5/w4AAAAEAAEAAAD6/w4AAAABAAIAAAD5/wwAAAAHAAAAAAD4/wwAAAAEAAMAAAD6/w0AAAABAAAAAAD5/w0AAAAEAAIAAAD7/w4AAAABAAIAAAD8/w4AAAAIAAEAAAD9/w4AAAABAAIAAAD+/w4AAAABAAIAAAD//w4AAAABAAIAAAD7/w0AAAABAAAAAAD8/w0AAAAIAAIAAAD9/w0AAAABAAAAAAD+/w0AAAABAAAAAAD//w0AAAABAAAAAAAAAA0AAAABAAAAAAABAA0AAAABAAAAAAACAA0AAAAIAAIAAAADAA0AAAABAAAAAAAEAA0AAAABAAAAAAAFAA0AAAABAAAAAAAHAA0AAAABAAAAAAAGAA0AAAABAAAAAAAIAA0AAAAIAAIAAAAKAA0AAAABAAAAAAAJAA0AAAABAAAAAAALAA0AAAABAAAAAAAMAA0AAAAIAAIAAAANAA0AAAABAAAAAAAPAA0AAAABAAAAAAAOAA0AAAABAAAAAAAQAA0AAAABAAAAAAARAA0AAAABAAAAAAASAA0AAAAIAAIAAAATAA0AAAABAAAAAAAUAA0AAAABAAAAAAAWAA0AAAABAAAAAAAVAA0AAAABAAAAAAAXAA0AAAABAAAAAAAYAA0AAAABAAAAAAAZAA0AAAABAAAAAAAaAA0AAAABAAAAAAAbAA0AAAABAAAAAAAcAA0AAAABAAAAAAAdAA0AAAAIAAIAAAAeAA0AAAABAAAAAAAfAA0AAAABAAAAAAAgAA0AAAABAAAAAAAhAA0AAAABAAAAAAAiAA0AAAABAAAAAAAjAA0AAAAFAAAAAAAjAA4AAAAHAAEAAAAhAA4AAAABAAIAAAAiAA4AAAABAAIAAAAgAA4AAAABAAIAAAAdAA4AAAABAAIAAAAeAA4AAAABAAIAAAAfAA4AAAABAAIAAAAaAA4AAAABAAIAAAAbAA4AAAAIAAEAAAAcAA4AAAABAAIAAAAYAA4AAAABAAIAAAAZAA4AAAABAAIAAAAWAA4AAAABAAIAAAAXAA4AAAABAAIAAAAVAA4AAAABAAIAAAAUAA4AAAABAAIAAAASAA4AAAAIAAEAAAATAA4AAAABAAIAAAARAA4AAAABAAIAAAAQAA4AAAABAAIAAAAOAA4AAAABAAIAAAAPAA4AAAABAAIAAAANAA4AAAABAAIAAAAMAA4AAAAIAAEAAAALAA4AAAABAAIAAAAKAA4AAAABAAIAAAAJAA4AAAABAAIAAAAIAA4AAAABAAIAAAAHAA4AAAABAAIAAAAGAA4AAAAIAAEAAAAFAA4AAAABAAIAAAADAA4AAAABAAIAAAAEAA4AAAABAAIAAAACAA4AAAABAAIAAAABAA4AAAAIAAEAAAAAAA4AAAABAAIAAAD1/xUAAAAAAAEAAAD2/xUAAAACAAEAAAD2/xYAAAACAAEAAAD2/xcAAAACAAEAAAD2/xgAAAACAAEAAAD2/xkAAAACAAEAAAD2/xoAAAACAAEAAAD2/xsAAAACAAEAAAD1/xYAAAAAAAEAAAD1/xcAAAAAAAEAAAD1/xgAAAAAAAEAAAD1/xkAAAAAAAEAAAD1/xoAAAAAAAEAAAD1/xsAAAAAAAEAAAD1/xwAAAAAAAEAAAD1/x0AAAAAAAEAAAD1/x4AAAAAAAEAAAD1/x8AAAAAAAEAAAD1/yAAAAAAAAEAAAD1/yEAAAAAAAEAAAD1/yIAAAAAAAEAAAD1/yMAAAAAAAEAAAD1/yQAAAAAAAEAAAD1/yUAAAAAAAEAAAD1/yYAAAAAAAIAAAD2/xwAAAACAAEAAAD2/x0AAAACAAEAAAD2/x4AAAACAAEAAAD2/x8AAAACAAEAAAD2/yAAAAAFAAQAAAD2/yEAAAACAAEAAAD2/yIAAAACAAEAAAD2/yMAAAACAAEAAAD2/yQAAAACAAEAAAD2/yUAAAACAAEAAAD2/yYAAAAHAAEAAAD2/ycAAAADAAIAAAD3/yAAAAABAAMAAAD4/yAAAAAHAAAAAAD5/yEAAAABAAMAAAD6/yEAAAAHAAAAAAD7/yIAAAABAAMAAAD8/yIAAAAIAAMAAAD9/yIAAAAHAAAAAAD9/yMAAAAEAAMAAAD+/yMAAAABAAMAAAD//yMAAAAHAAAAAAAAACQAAAABAAMAAAABACQAAAAIAAMAAAACACQAAAAHAAAAAAADACUAAAABAAMAAAAEACUAAAABAAMAAAAFACUAAAABAAMAAAAGACUAAAAHAAIAAAAHACYAAAABAAMAAAAIACYAAAABAAMAAAAJACYAAAABAAMAAAAKACYAAAAHAAAAAAAKACcAAAADAAIAAAAGACYAAAAEAAMAAAACACUAAAAEAAMAAAD//yQAAAAEAAMAAAD6/yIAAAAEAAMAAAD4/yEAAAAEAAMAAAD8/yEAAAADAAEAAAD8/yAAAAADAAEAAAD8/x8AAAADAAEAAAD8/x4AAAADAAEAAAD8/x0AAAADAAEAAAD8/xwAAAADAAEAAAD8/xsAAAADAAEAAAD8/xoAAAADAAEAAAD8/xkAAAADAAEAAAD8/xgAAAADAAEAAAD8/xcAAAADAAEAAAD8/xYAAAADAAEAAAD8/xUAAAADAAEAAAD8/xQAAAADAAEAAAD8/xMAAAADAAEAAAD8/xIAAAAEAAQAAAD8/xEAAAADAAEAAAD8/xAAAAADAAEAAAD8/w8AAAADAAEAAAD9/xIAAAABAAMAAAD+/xIAAAACAAMAAAABABwAAAAEAAAAAAABAB0AAAADAAEAAAABAB4AAAADAAEAAAABAB8AAAADAAEAAAABACAAAAADAAEAAAABACEAAAADAAEAAAABACIAAAADAAEAAAABACMAAAADAAEAAAACABwAAAABAAMAAAADAB0AAAAEAAMAAAAEAB0AAAABAAMAAAAFAB0AAAAHAAAAAAAFAB4AAAAEAAMAAAAGAB4AAAAIAAAAAAADABwAAAAHAAAAAAAHAB4AAAABAAMAAAAIAB4AAAABAAMAAAAJAB4AAAAHAAAAAAAJAB8AAAAEAAMAAAAKAB8AAAABAAMAAAALAB8AAAABAAMAAAAMAB8AAAAIAAMAAAANAB8AAAABAAMAAAAOAB8AAAABAAMAAAAPAB8AAAABAAMAAAAQAB8AAAABAAMAAAARAB8AAAABAAMAAAASAB8AAAAIAAMAAAATAB8AAAABAAMAAAAUAB8AAAABAAMAAAAVAB8AAAABAAMAAAAWAB8AAAABAAMAAAAXAB8AAAABAAMAAAAYAB8AAAABAAMAAAAZAB8AAAABAAMAAAAaAB8AAAABAAMAAAAbAB8AAAABAAMAAAAcAB8AAAAIAAAAAAAdAB8AAAABAAMAAAAeAB8AAAABAAMAAAAfAB8AAAABAAMAAAAgAB8AAAABAAMAAAAhAB8AAAABAAMAAAAiAB8AAAABAAMAAAAjAB8AAAABAAMAAAAkAB8AAAABAAMAAAAlAB8AAAAHAAMAAAAlAB4AAAADAAEAAAAmAB0AAAACAAMAAAAlAB0AAAAEAAQAAAAlABEAAAADAAEAAAAlABIAAAADAAEAAAAlABMAAAADAAEAAAAlABQAAAADAAEAAAAlABUAAAADAAEAAAAlABYAAAADAAEAAAAlABcAAAADAAEAAAAlABgAAAADAAEAAAAlABkAAAADAAEAAAAlABoAAAADAAEAAAAlABsAAAADAAEAAAAlABwAAAADAAEAAAAjAA8AAAAEAAMAAAAkAA8AAAAHAAAAAAAkABAAAAAEAAMAAAAlABAAAAAIAAAAAAAmAA8AAAAEAAAAAAAmABAAAAAHAAMAAAAnAA4AAAADAAEAAAAnAA8AAAAHAAMAAAAnAA0AAAAHAAAAAAAmAA0AAAAEAAMAAAAlAAwAAAAIAAMAAAAmAAwAAAAHAAAAAAAkAAwAAAAEAAAAAAAkAA0AAAAHAAMAAAAlAAsAAAADAAEAAAAlAAoAAAADAAEAAAAlAAkAAAADAAEAAAAlAAgAAAADAAEAAAAlAAcAAAADAAAAAAAdAAwAAAADAAEAAAAdAAsAAAADAAEAAAAdAAkAAAADAAEAAAAdAAgAAAAHAAAAAAAdAAoAAAADAAEAAAAcAAgAAAABAAMAAAAbAAgAAAABAAMAAAAaAAgAAAABAAMAAAAZAAgAAAABAAMAAAAYAAgAAAABAAMAAAAXAAgAAAABAAMAAAAWAAgAAAABAAMAAAAVAAgAAAABAAMAAAAUAAgAAAABAAMAAAATAAgAAAABAAMAAAASAAwAAAADAAEAAAASAAsAAAADAAEAAAASAAoAAAADAAEAAAASAAkAAAADAAEAAAASAAgAAAAEAAQAAAASAAcAAAADAAEAAAASAAYAAAADAAEAAAASAAUAAAADAAEAAAASAAQAAAADAAAAAAAMAAMAAAADAAAAAAAMAAQAAAADAAEAAAAMAAYAAAADAAEAAAAMAAUAAAADAAEAAAAMAAcAAAADAAEAAAAMAAgAAAADAAEAAAAMAAkAAAADAAEAAAAMAAoAAAADAAEAAAAMAAsAAAADAAEAAAAMAAwAAAADAAEAAAD8/wYAAAAEAAAAAAD9/wYAAAABAAMAAAD+/wYAAAABAAMAAAD//wYAAAABAAMAAAAAAAYAAAABAAMAAAABAAYAAAABAAMAAAACAAYAAAAIAAAAAAADAAYAAAABAAMAAAAEAAYAAAABAAMAAAAFAAYAAAABAAMAAAAGAAYAAAABAAMAAAAHAAYAAAABAAMAAAAIAAYAAAAHAAAAAAAIAAcAAAADAAEAAAAIAAgAAAADAAEAAAAIAAkAAAADAAEAAAAIAAoAAAADAAEAAAAIAAsAAAADAAEAAAAIAAwAAAADAAEAAAD8/wcAAAADAAEAAAD8/wgAAAADAAEAAAD8/wkAAAADAAEAAAD8/woAAAADAAEAAAD8/wsAAAADAAEAAAD8/wwAAAADAAEAAAACAAcAAAADAAEAAAACAAgAAAADAAEAAAACAAkAAAADAAEAAAACAAoAAAADAAEAAAACAAsAAAADAAEAAAACAAwAAAADAAEAAAABAA8AAAADAAEAAAABABAAAAADAAEAAAABABEAAAADAAEAAAABABIAAAADAAEAAAABABMAAAADAAEAAAABABQAAAAEAAQAAAABABUAAAADAAEAAAABABYAAAADAAEAAAABABcAAAADAAEAAAABABgAAAADAAEAAAABABkAAAADAAEAAAABABoAAAADAAIAAAACABQAAAABAAMAAAADABQAAAABAAMAAAAEABQAAAABAAMAAAAFABQAAAABAAMAAAAGABQAAAAJAAQAAAAHABQAAAACAAMAAAAMAA8AAAADAAEAAAAMABAAAAADAAEAAAAMABEAAAADAAEAAAAMABIAAAADAAEAAAAMABMAAAADAAEAAAAMABQAAAADAAEAAAAMABUAAAADAAEAAAAMABYAAAADAAEAAAAMABcAAAADAAEAAAAMABgAAAADAAEAAAAMABkAAAADAAEAAAAMABoAAAADAAEAAAAMABsAAAADAAEAAAAMABwAAAADAAEAAAAMAB0AAAADAAEAAAAMAB4AAAADAAEAAAAGABsAAAADAAIAAAAGABoAAAADAAEAAAAGABkAAAADAAEAAAAGABgAAAADAAEAAAAGABcAAAADAAEAAAAGABYAAAADAAEAAAAGABUAAAADAAEAAAAGABMAAAADAAEAAAAGABIAAAADAAEAAAAGABEAAAADAAEAAAAGABAAAAADAAEAAAAGAA8AAAADAAEAAAASAA8AAAADAAEAAAASABAAAAADAAEAAAASABEAAAADAAEAAAASABIAAAADAAEAAAASABMAAAADAAEAAAASABQAAAADAAEAAAASABUAAAADAAEAAAASABYAAAADAAEAAAASABcAAAADAAEAAAASABgAAAADAAEAAAASABkAAAAEAAQAAAASABoAAAADAAEAAAASABsAAAADAAEAAAASABwAAAADAAEAAAASAB0AAAADAAEAAAASAB4AAAADAAEAAAATABkAAAABAAMAAAAUABkAAAABAAMAAAAVABkAAAABAAMAAAAWABkAAAABAAMAAAAXABkAAAABAAMAAAAYABkAAAABAAMAAAAZABkAAAABAAMAAAAaABkAAAABAAMAAAAbABkAAAAIAAMAAAAcABkAAAABAAMAAAAdABkAAAABAAMAAAAeABkAAAABAAMAAAAfABkAAAABAAMAAAAgABkAAAABAAMAAAAhABkAAAABAAMAAAAiABkAAAACAAMAAAAUABQAAAAAAAMAAAAVABQAAAABAAMAAAAWABQAAAABAAMAAAAXABQAAAABAAMAAAAYABQAAAABAAMAAAAZABQAAAABAAMAAAAaABQAAAABAAMAAAAbABQAAAAHAAEAAAAbAA8AAAADAAEAAAAbABAAAAADAAEAAAAbABEAAAADAAEAAAAbABIAAAADAAEAAAAbABMAAAADAAEAAAAbABUAAAADAAEAAAAbABYAAAADAAEAAAAbABcAAAADAAEAAAAbABgAAAADAAEAAAAcACAAAAADAAEAAAAcACEAAAAEAAQAAAAcACIAAAADAAEAAAAcACMAAAADAAEAAAAcACQAAAADAAEAAAAcACUAAAADAAEAAAAcACYAAAADAAEAAAAcACcAAAADAAIAAAAhACEAAAABAAMAAAAiACEAAAAHAAAAAAAdACEAAAABAAMAAAAeACEAAAABAAMAAAAfACEAAAABAAMAAAAgACEAAAABAAMAAAAiACIAAAADAAEAAAAiACMAAAADAAEAAAAhACQAAAAEAAAAAAAiACQAAAAHAAMAAAAhACUAAAADAAEAAAAhACYAAAAHAAMAAAAgACYAAAAEAAAAAAAgACcAAAADAAIAAAAGAB8AAAADAAEAAAAGACAAAAADAAEAAAAGACEAAAADAAEAAAAGACIAAAADAAEAAAAGACMAAAADAAEAAAAGACQAAAADAAEAAAD4/xIAAAADAAEAAAD4/xMAAAAHAAMAAAD3/xQAAAACAAIAAAD2/xMAAAAFAAIAAAD3/xMAAAAFAAAAAAA=")
 tile_set = SubResource("TileSet_mq31s")
+
+[node name="RainFloorParticles" type="GPUParticles2D" parent="Layers"]
+material = SubResource("CanvasItemMaterial_8iyoh")
+position = Vector2(268, 340)
+emitting = false
+amount = 1000
+texture = ExtResource("7_qogh7")
+process_material = SubResource("ParticleProcessMaterial_mq31s")
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -1459,9 +1502,10 @@ position = Vector2(776, 865)
 position = Vector2(-394, 790)
 
 [node name="SimpleObject" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(159, 298)
-size = 2
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject2" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1473,7 +1517,7 @@ random = true
 [node name="SimpleObject3" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-331, 274)
 size = 2
-style = 1
+style = 0
 random = true
 
 [node name="SimpleObject4" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1498,10 +1542,9 @@ style = 0
 random = true
 
 [node name="SimpleObject7" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-254, 152)
-size = 1
-style = 0
+size = 2
+style = 1
 random = true
 
 [node name="SimpleObject8" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1511,21 +1554,21 @@ style = 1
 random = true
 
 [node name="SimpleObject9" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-124, 103)
-size = 0
-style = 1
+size = 3
+style = 0
 random = true
 
 [node name="SimpleObject10" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(-45, 58)
-size = 3
+size = 1
 style = 1
 random = true
 
 [node name="SimpleObject11" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-12, 104)
-size = 2
+size = 3
 style = 1
 random = true
 
@@ -1533,38 +1576,38 @@ random = true
 z_index = -1
 position = Vector2(64, 71)
 size = 1
-style = 1
+style = 0
 random = true
 
 [node name="SimpleObject13" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(33, 183)
-size = 1
+size = 0
 style = 1
 random = true
 
 [node name="SimpleObject14" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(88, 133)
 size = 2
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject15" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(129, 165)
-size = 1
-style = 1
+size = 0
+style = 0
 random = true
 
 [node name="SimpleObject16" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(193, 58)
-size = 2
+size = 3
 style = 1
 random = true
 
 [node name="SimpleObject17" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(144, 90)
-size = 3
+size = 2
 style = 0
 random = true
 
@@ -1576,16 +1619,15 @@ style = 0
 random = true
 
 [node name="SimpleObject19" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(541, 182)
-size = 0
+size = 2
 style = 1
 random = true
 
 [node name="SimpleObject20" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(408, 114)
-size = 3
-style = 1
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject21" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1596,14 +1638,14 @@ random = true
 
 [node name="SimpleObject22" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(584, 121)
-size = 3
-style = 1
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject23" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(627, 182)
 size = 2
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject24" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1616,7 +1658,7 @@ random = true
 [node name="SimpleObject25" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(722, 242)
-size = 0
+size = 1
 style = 0
 random = true
 
@@ -1624,65 +1666,65 @@ random = true
 z_index = -1
 position = Vector2(723, 463)
 size = 0
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject27" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(729, 360)
-size = 3
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject28" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(691, 553)
-size = 0
+size = 2
 style = 1
 random = true
 
 [node name="SimpleObject29" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(699, 515)
-size = 3
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject30" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(662, 551)
-size = 3
+size = 2
 style = 1
 random = true
 
 [node name="SimpleObject31" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(603, 541)
-size = 3
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject32" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(526, 588)
-size = 0
+size = 3
 style = 0
 random = true
 
 [node name="SimpleObject33" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(521, 631)
-size = 0
-style = 1
+size = 1
+style = 0
 random = true
 
 [node name="SimpleObject34" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(434, 634)
-size = 2
+size = 3
 style = 1
 random = true
 
 [node name="SimpleObject35" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(536, 508)
-size = 1
-style = 0
+size = 2
+style = 1
 random = true
 
 [node name="SimpleObject36" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1692,36 +1734,33 @@ style = 1
 random = true
 
 [node name="SimpleObject37" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(226, 623)
-size = 0
-style = 1
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject38" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(282, 600)
-size = 2
+size = 3
 style = 1
 random = true
 
 [node name="SimpleObject39" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(37, 649)
-size = 1
-style = 0
-random = true
-
-[node name="SimpleObject40" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
-position = Vector2(23, 567)
-size = 1
+size = 0
 style = 1
 random = true
 
+[node name="SimpleObject40" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(23, 567)
+size = 2
+style = 0
+random = true
+
 [node name="SimpleObject41" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-75, 588)
-size = 1
+size = 3
 style = 1
 random = true
 
@@ -1732,74 +1771,74 @@ style = 0
 random = true
 
 [node name="SimpleObject43" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(-171, 531)
-size = 2
+size = 1
 style = 1
 random = true
 
 [node name="SimpleObject44" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(-264, 570)
-size = 3
-style = 1
+size = 0
+style = 0
 random = true
 
 [node name="SimpleObject45" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-287, 499)
 size = 2
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject46" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-238, 538)
-size = 0
-style = 0
+size = 3
+style = 1
 random = true
 
 [node name="SimpleObject47" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-288, 398)
 size = 2
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject48" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-514, 536)
 size = 2
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject49" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(-484, 484)
 size = 0
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject50" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(-563, 287)
-size = 2
-style = 1
+size = 0
+style = 0
 random = true
 
 [node name="SimpleObject51" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-518, 382)
-size = 0
-style = 1
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject52" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-462, 335)
-size = 0
-style = 0
+size = 3
+style = 1
 random = true
 
 [node name="SimpleObject53" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(-421, 818)
 size = 0
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject54" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1810,28 +1849,30 @@ style = 0
 random = true
 
 [node name="SimpleObject55" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(801, 853)
-size = 2
+size = 0
 style = 0
 random = true
 
 [node name="SimpleObject56" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(339, -22)
-size = 0
-style = 1
-random = true
-
-[node name="SimpleObject57" parent="Objects" instance=ExtResource("8_ouxo3")]
-position = Vector2(750, -43)
 size = 2
 style = 0
 random = true
 
+[node name="SimpleObject57" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
+position = Vector2(750, -43)
+size = 0
+style = 1
+random = true
+
 [node name="SimpleObject58" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(-322, -37)
-size = 3
-style = 0
+size = 0
+style = 1
 random = true
 
 [node name="SimpleObject59" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1841,22 +1882,21 @@ style = 1
 random = true
 
 [node name="SimpleObject60" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(-70, 295)
-size = 3
-style = 0
+size = 0
+style = 1
 random = true
 
 [node name="SimpleObject61" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(99, 518)
-size = 0
-style = 0
+size = 2
+style = 1
 random = true
 
 [node name="SimpleObject62" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(386, 328)
-size = 1
+size = 2
 style = 0
 random = true
 
@@ -1864,72 +1904,74 @@ random = true
 z_index = -1
 position = Vector2(380, 450)
 size = 0
-style = 1
+style = 0
 random = true
 
 [node name="SimpleObject64" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(552, 354)
-size = 2
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject65" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(299, 168)
-size = 2
-style = 0
+size = 0
+style = 1
 random = true
 
 [node name="SimpleObject66" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(307, 268)
 size = 0
-style = 1
+style = 0
 random = true
 
 [node name="SimpleObject67" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(-40, 434)
-size = 1
-style = 0
+size = 2
+style = 1
 random = true
 
 [node name="SimpleObject68" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(986, 301)
-size = 0
-style = 1
+size = 1
+style = 0
 random = true
 
 [node name="SimpleObject69" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(976, 469)
-size = 3
-style = 0
+size = 2
+style = 1
 random = true
 
 [node name="SimpleObject70" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(1081, 280)
 size = 1
-style = 0
+style = 1
 random = true
 
 [node name="SimpleObject71" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
 position = Vector2(1104, 504)
-size = 2
-style = 0
+size = 0
+style = 1
 random = true
 
 [node name="SimpleObject72" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(999, 374)
-size = 0
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject73" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(1046, 378)
-size = 0
+size = 1
 style = 1
 random = true
 
@@ -1942,29 +1984,28 @@ random = true
 [node name="SimpleObject75" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(1177, 304)
-size = 0
-style = 1
+size = 1
+style = 0
 random = true
 
 [node name="SimpleObject76" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = -1
 position = Vector2(1196, 676)
-size = 1
+size = 2
 style = 1
 random = true
 
 [node name="SimpleObject77" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(1195, 423)
-size = 0
-style = 0
+size = 1
+style = 1
 random = true
 
 [node name="SimpleObject78" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = -1
 position = Vector2(1215, 545)
 size = 0
-style = 0
+style = 1
 random = true
 
 [node name="Overlay" type="Node2D" parent="."]
@@ -1983,6 +2024,14 @@ grow_vertical = 2
 color = Color(0.023529412, 0.023529412, 0.023529412, 1)
 
 [node name="PlantInfoContainer" parent="Overlay/CanvasLayer" instance=ExtResource("10_rmjfq")]
+
+[node name="RainDropsParticle" type="GPUParticles2D" parent="Overlay"]
+material = SubResource("CanvasItemMaterial_mq31s")
+position = Vector2(267, 341)
+emitting = false
+amount = 1000
+texture = ExtResource("13_8iyoh")
+process_material = SubResource("ParticleProcessMaterial_5mi6g")
 
 [node name="Timers" type="Node" parent="."]
 

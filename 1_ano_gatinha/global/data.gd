@@ -86,3 +86,6 @@ const TOOL_STATE_ANIMATIONS = {
 	Enum.Tool.FISH: 'Fish',
 	Enum.Tool.SEED: 'Seed',
 	}
+
+
+var forecast_rain: bool

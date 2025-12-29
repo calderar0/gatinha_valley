@@ -13,7 +13,7 @@ signal tool_use(tool: Enum.Tool, pos: Vector2)
 signal diagnose
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if can_move:
 		get_basic_input()
 		move()
@@ -59,9 +59,9 @@ func tool_use_emit():
 	tool_use.emit(current_tool, position + last_direction * 16 + Vector2(0,4))
 
 
-func _on_animation_tree_animation_started(anim_name: StringName) -> void:
+func _on_animation_tree_animation_started(_anim_name: StringName) -> void:
 	can_move = false
 
 
-func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+func _on_animation_tree_animation_finished(_anim_name: StringName) -> void:
 	can_move = true
