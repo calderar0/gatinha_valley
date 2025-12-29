@@ -34,6 +34,7 @@ shape = SubResource("CapsuleShape2D_5qchx")
 material = SubResource("ShaderMaterial_lg7fn")
 texture = ExtResource("1_r6wkp")
 hframes = 2
+frame = 1
 
 [node name="AppleSpawnPosition" type="Node2D" parent="."]
 
