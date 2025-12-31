@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dft0en5o6oeox"]
+
+[ext_resource type="Script" uid="uid://mvwddkbipogi" path="res://scenes/levels/bookshelf.gd" id="1_cxivd"]
+[ext_resource type="Texture2D" uid="uid://baujryqqid5kt" path="res://graphics/objects/bookshelf.png" id="1_fv0tm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxivd"]
+size = Vector2(20, 19)
+
+[node name="Bookshelf" type="StaticBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_cxivd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fv0tm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_cxivd")

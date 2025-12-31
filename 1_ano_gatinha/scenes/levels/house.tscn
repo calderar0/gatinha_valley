@@ -1,9 +1,17 @@
-[gd_scene load_steps=9 format=4 uid="uid://byqqu3qpel7bq"]
+[gd_scene load_steps=22 format=4 uid="uid://byqqu3qpel7bq"]
 
 [ext_resource type="Script" uid="uid://bbhyinbodm8or" path="res://scenes/levels/house.gd" id="1_g6yoe"]
 [ext_resource type="TileSet" uid="uid://cw45kfg2c8mfk" path="res://premade/HouseTileSet.tres" id="1_mfwd8"]
 [ext_resource type="Texture2D" uid="uid://dpvg3yddudamn" path="res://graphics/tilesets/walls_floor_tile.png" id="2_bbbus"]
 [ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="4_jfia5"]
+[ext_resource type="PackedScene" uid="uid://nnge1e5q7884" path="res://scenes/levels/tv.tscn" id="5_ap60n"]
+[ext_resource type="PackedScene" uid="uid://7mis1es7xmxh" path="res://scenes/levels/bed.tscn" id="6_4yql1"]
+[ext_resource type="Texture2D" uid="uid://c6gdvovhpj0oj" path="res://graphics/objects/plant.png" id="7_dc68u"]
+[ext_resource type="Texture2D" uid="uid://c2s2an72yb61k" path="res://graphics/objects/antarcticbees_interior_free_sample.png" id="8_dvuk3"]
+[ext_resource type="Texture2D" uid="uid://b1eeactik3oq3" path="res://graphics/objects/table.png" id="9_ctgqc"]
+[ext_resource type="Texture2D" uid="uid://lg0d2lrhpvam" path="res://graphics/objects/tiles and items.png" id="10_ctgqc"]
+[ext_resource type="Texture2D" uid="uid://dvaxmp1m08kte" path="res://graphics/objects/carpet.png" id="10_op4as"]
+[ext_resource type="PackedScene" uid="uid://dft0en5o6oeox" path="res://scenes/levels/bookshelf.tscn" id="12_op4as"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jfia5"]
 texture = ExtResource("2_bbbus")
@@ -36,20 +44,38 @@ texture = ExtResource("4_jfia5")
 [sub_resource type="TileSet" id="TileSet_4yql1"]
 sources/0 = SubResource("TileSetAtlasSource_ap60n")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6eqm"]
+size = Vector2(4, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wryub"]
+atlas = ExtResource("8_dvuk3")
+region = Rect2(147, 96, 10, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ar8a6"]
+size = Vector2(22, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op4as"]
+atlas = ExtResource("10_ctgqc")
+region = Rect2(66, 131, 10, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wryub"]
+size = Vector2(4, 6)
+
 [node name="House" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_g6yoe")
 
 [node name="FloorLayer" type="TileMapLayer" parent="."]
-z_index = -1
+z_index = -2
 tile_set = SubResource("TileSet_ap60n")
 
 [node name="WallsLayer" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAGAAEAAAACAAIAAAAGAAAAAAACAAEAAAAGAP//AAACAAEAAAAGAP7/AAACAAEAAAAGAP3/AAACAAEAAAAGAPz/AAACAAAAAAAFAAMAAAACAAIAAAAFAAIAAAACAAEAAAAFAAEAAAAFAAEAAAAFAAAAAAABAAEAAAAFAP//AAABAAEAAAAFAP7/AAABAAEAAAAFAP3/AAABAAEAAAAFAPz/AAABAAAAAAAEAAMAAAABAAIAAAAEAAIAAAABAAEAAAAEAAEAAAABAAEAAAAEAAAAAAABAAEAAAAEAP//AAABAAEAAAAEAP7/AAABAAEAAAAEAP3/AAABAAEAAAAEAPz/AAABAAAAAAADAAMAAAABAAIAAAADAAIAAAABAAEAAAADAAEAAAABAAEAAAADAAAAAAABAAEAAAADAP//AAABAAEAAAADAP7/AAABAAEAAAADAP3/AAABAAEAAAADAPz/AAABAAAAAAACAAMAAAABAAIAAAACAAIAAAABAAEAAAACAAEAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAACAP3/AAABAAEAAAACAPz/AAABAAAAAAABAAMAAAABAAIAAAABAAIAAAABAAEAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAEAAAABAP3/AAABAAEAAAABAPz/AAABAAAAAAAAAAMAAAABAAIAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAAAAPz/AAABAAAAAAD//wMAAAAAAAQAAAD//wIAAAABAAEAAAD//wEAAAABAAEAAAD//wAAAAABAAEAAAD/////AAABAAEAAAD///7/AAABAAEAAAD///3/AAABAAEAAAD///z/AAABAAAAAAD+/wMAAAABAAIAAAD+/wIAAAABAAEAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAEAAAD+//z/AAABAAAAAAD9/wMAAAABAAIAAAD9/wIAAAABAAEAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAEAAAD9//z/AAABAAAAAAD8/wMAAAAAAAIAAAD8/wIAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAEAAAD8//7/AAAAAAEAAAD8//3/AAAAAAEAAAD8//z/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAGAAEAAAACAAIAAAAGAAAAAAACAAEAAAAGAP//AAACAAEAAAAGAP7/AAACAAEAAAAGAP3/AAACAAEAAAAGAPz/AAACAAAAAAAFAAEAAAAFAAEAAAAFAAAAAAABAAEAAAAFAP//AAABAAEAAAAFAP7/AAABAAEAAAAFAP3/AAABAAEAAAAFAPz/AAABAAAAAAAEAAEAAAABAAEAAAAEAAAAAAABAAEAAAAEAP//AAABAAEAAAAEAP7/AAABAAEAAAAEAP3/AAABAAEAAAAEAPz/AAABAAAAAAADAAEAAAABAAEAAAADAAAAAAABAAEAAAADAP//AAABAAEAAAADAP7/AAABAAEAAAADAP3/AAABAAEAAAADAPz/AAABAAAAAAACAAEAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAACAP3/AAABAAEAAAACAPz/AAABAAAAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAEAAAABAP3/AAABAAEAAAABAPz/AAABAAAAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAAAAPz/AAABAAAAAAD//wEAAAABAAEAAAD//wAAAAABAAEAAAD/////AAABAAEAAAD///7/AAABAAEAAAD///3/AAABAAEAAAD///z/AAABAAAAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAEAAAD+//z/AAABAAAAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAEAAAD9//z/AAABAAAAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAEAAAD8//7/AAAAAAEAAAD8//3/AAAAAAEAAAD8//z/AAAAAAAAAAAFAAMAAAACAAIAAAAEAAMAAAABAAIAAAAEAAIAAAABAAEAAAAFAAIAAAACAAEAAAADAAMAAAABAAIAAAADAAIAAAABAAEAAAACAAMAAAABAAIAAAACAAIAAAABAAEAAAABAAMAAAABAAIAAAABAAIAAAABAAEAAAAAAAMAAAABAAIAAAAAAAIAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAAAAAQAAAD+/wMAAAABAAIAAAD+/wIAAAABAAEAAAD9/wMAAAABAAIAAAD9/wIAAAABAAEAAAD8/wMAAAAAAAIAAAD8/wIAAAAAAAEAAAA=")
 tile_set = ExtResource("1_mfwd8")
 
 [node name="RoofLayer" type="TileMapLayer" parent="."]
+visible = false
 z_index = 2
 tile_map_data = PackedByteArray("AAD8/wMAAAAAAAUAAAD9/wMAAAABAAUAAAD+/wMAAAABAAUAAAD//wMAAAABAAUAAAAAAAMAAAABAAUAAAABAAMAAAABAAUAAAACAAMAAAABAAUAAAADAAMAAAABAAUAAAAEAAMAAAABAAUAAAAFAAMAAAACAAUAAAAGAAEAAAACAAQAAAAFAAIAAAACAAQAAAAFAAEAAAABAAQAAAAGAAIAAAACAAUAAAAGAAAAAAACAAMAAAAEAAIAAAABAAQAAAADAAIAAAABAAQAAAACAAIAAAABAAQAAAABAAIAAAABAAQAAAAAAAIAAAABAAQAAAD//wIAAAABAAQAAAD+/wIAAAABAAQAAAD9/wIAAAABAAQAAAD9/wEAAAABAAQAAAD+/wEAAAABAAQAAAD//wEAAAABAAQAAAAAAAEAAAABAAQAAAABAAEAAAABAAQAAAACAAEAAAABAAQAAAADAAEAAAABAAQAAAAEAAEAAAABAAQAAAAFAAAAAAABAAMAAAAEAAAAAAABAAMAAAADAAAAAAABAAMAAAACAAAAAAABAAMAAAABAAAAAAABAAMAAAAAAAAAAAABAAMAAAD//wAAAAABAAMAAAD+/wAAAAABAAMAAAD9/wAAAAABAAMAAAAGAP//AAACAAMAAAD8////AAAAAAMAAAD8/wAAAAAAAAMAAAD8/wEAAAAAAAMAAAD8/wIAAAAAAAMAAAD9////AAABAAMAAAD+////AAABAAMAAAD/////AAABAAMAAAAAAP//AAABAAMAAAABAP//AAABAAMAAAACAP//AAABAAMAAAADAP//AAABAAMAAAAEAP//AAABAAMAAAAFAP//AAABAAMAAAAGAP7/AAACAAIAAAAGAP3/AAACAAEAAAAGAPz/AAACAAEAAAAFAPz/AAABAAEAAAAGAPv/AAACAAAAAAAFAPv/AAABAAAAAAAEAPv/AAABAAAAAAADAPv/AAABAAAAAAACAPv/AAABAAAAAAABAPv/AAABAAAAAAAAAPv/AAABAAAAAAD///v/AAABAAAAAAD+//v/AAABAAAAAAD9//v/AAABAAAAAAD8//v/AAAAAAAAAAD8//z/AAAAAAEAAAD8//3/AAAAAAEAAAD8//7/AAAAAAIAAAD9//z/AAABAAEAAAD+//z/AAABAAEAAAD///z/AAABAAEAAAAAAPz/AAABAAEAAAABAPz/AAABAAEAAAACAPz/AAABAAEAAAADAPz/AAABAAEAAAAEAPz/AAABAAEAAAAFAP3/AAABAAEAAAAFAP7/AAABAAIAAAAEAP7/AAABAAIAAAADAP7/AAABAAIAAAACAP7/AAABAAIAAAABAP7/AAABAAIAAAAAAP7/AAABAAIAAAD///7/AAABAAIAAAD+//7/AAABAAIAAAD+//3/AAABAAEAAAD9//3/AAABAAEAAAD9//7/AAABAAIAAAD///3/AAABAAEAAAAAAP3/AAABAAEAAAABAP3/AAABAAEAAAACAP3/AAABAAEAAAADAP3/AAABAAEAAAAEAP3/AAABAAEAAAA=")
 tile_set = SubResource("TileSet_4yql1")
@@ -61,6 +87,147 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseArea"]
 polygon = PackedVector2Array(-62, 62, -62, -59, 109, -59, 109, 29, 94, 28, 94, 61, 0, 60, 0, 73, -17, 73, -18, 60)
+
+[node name="TV" parent="." instance=ExtResource("5_ap60n")]
+position = Vector2(-33, -45)
+
+[node name="Carpet2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(76, 40)
+texture = ExtResource("10_op4as")
+
+[node name="BED" parent="." instance=ExtResource("6_4yql1")]
+position = Vector2(76, 38)
+
+[node name="Plant" type="StaticBody2D" parent="."]
+position = Vector2(-51, -49)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="Plant"]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plant"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_e6eqm")
+
+[node name="Plant4" type="StaticBody2D" parent="."]
+position = Vector2(100, -51)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="Plant4"]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plant4"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_e6eqm")
+
+[node name="Plant2" type="StaticBody2D" parent="."]
+position = Vector2(101, 12)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="Plant2"]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plant2"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_e6eqm")
+
+[node name="Plant3" type="StaticBody2D" parent="."]
+position = Vector2(-23, 46)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="Plant3"]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plant3"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_e6eqm")
+
+[node name="Table" type="StaticBody2D" parent="."]
+position = Vector2(-36, 10)
+metadata/_edit_group_ = true
+
+[node name="AntarcticbeesInteriorFreeSample" type="Sprite2D" parent="Table"]
+z_index = 1
+position = Vector2(5, -2)
+scale = Vector2(0.7, 0.7)
+texture = SubResource("AtlasTexture_wryub")
+
+[node name="Table" type="Sprite2D" parent="Table"]
+position = Vector2(5, 2)
+texture = ExtResource("9_ctgqc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2(5, -0.5)
+shape = SubResource("RectangleShape2D_ar8a6")
+
+[node name="Books6" type="StaticBody2D" parent="."]
+position = Vector2(26, -47)
+metadata/_edit_group_ = true
+
+[node name="TilesAndItems" type="Sprite2D" parent="Books6"]
+scale = Vector2(1.0000001, 1)
+texture = SubResource("AtlasTexture_op4as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Books6"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wryub")
+
+[node name="Books7" type="StaticBody2D" parent="."]
+position = Vector2(73, -48)
+metadata/_edit_group_ = true
+
+[node name="TilesAndItems" type="Sprite2D" parent="Books7"]
+scale = Vector2(1.0000001, 1)
+texture = SubResource("AtlasTexture_op4as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Books7"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wryub")
+
+[node name="Books2" type="StaticBody2D" parent="."]
+position = Vector2(103, -12)
+metadata/_edit_group_ = true
+
+[node name="TilesAndItems" type="Sprite2D" parent="Books2"]
+scale = Vector2(1.0000001, 1)
+texture = SubResource("AtlasTexture_op4as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Books2"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wryub")
+
+[node name="Books4" type="StaticBody2D" parent="."]
+position = Vector2(63, 52)
+metadata/_edit_group_ = true
+
+[node name="TilesAndItems" type="Sprite2D" parent="Books4"]
+scale = Vector2(1.0000001, 1)
+texture = SubResource("AtlasTexture_op4as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Books4"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wryub")
+
+[node name="Books5" type="StaticBody2D" parent="."]
+position = Vector2(-57, -17)
+metadata/_edit_group_ = true
+
+[node name="TilesAndItems" type="Sprite2D" parent="Books5"]
+scale = Vector2(1.0000001, 1)
+texture = SubResource("AtlasTexture_op4as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Books5"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wryub")
+
+[node name="Carpet" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-31, 12)
+texture = ExtResource("10_op4as")
+
+[node name="Bookshelf" parent="." instance=ExtResource("12_op4as")]
+position = Vector2(50, -51)
 
 [connection signal="body_entered" from="HouseArea" to="." method="_on_house_area_body_entered"]
 [connection signal="body_exited" from="HouseArea" to="." method="_on_house_area_body_exited"]
