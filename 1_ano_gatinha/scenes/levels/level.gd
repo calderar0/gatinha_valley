@@ -33,9 +33,7 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 		
 		Enum.Tool.FISH:
 			if not grid_coord in $Layers/GrassLayer.get_used_cells():
-				print("pescando")
-			else:
-				print("nao to pescando caraio") 
+				$Objects/Player.start_fishing()
 		
 		Enum.Tool.SEED:
 			if has_soil and grid_coord not in used_cells:
@@ -70,9 +68,6 @@ func _process(_delta: float) -> void:
 	var daytimer_point = 1 - $Timers/DayLenghtTimer.time_left / $Timers/DayLenghtTimer.wait_time
 	var color = daytime_color.sample(daytimer_point).lerp(rain_color, 0.5 if raining else 0.0)
 	$Overlay/DaytimeColor.color = color
-	var sprite = Sprite2D.new()
-	sprite.texture = load("res://graphics/tilesets/grass.png")
-	add_child(sprite)
 
 func day_restart():
 	var tween = create_tween()

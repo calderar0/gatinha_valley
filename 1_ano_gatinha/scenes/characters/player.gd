@@ -8,6 +8,7 @@ var can_move: bool = true
 @onready var tool_state_machine = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
 var current_tool: Enum.Tool = Enum.Tool.AXE
 var current_seed: Enum.Seed
+var current_state: Enum.State
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
 signal diagnose
@@ -15,10 +16,14 @@ signal day_change
 
 
 func _physics_process(_delta: float) -> void:
-	if can_move:
-		get_basic_input()
-		move()
-		animate()
+	match current_state:
+		Enum.State.DEFAULT:
+			if can_move:
+				get_basic_input()
+				move()
+				animate()
+		Enum.State.FISHING:
+			get_fishing_input()
 	if direction:
 		last_direction = direction
 		var ray_y = int(direction.y) if not (direction.x) else 0
@@ -35,6 +40,7 @@ func animate():
 		var direction_animation =  Vector2(round(direction.x),round(direction.y))
 		$Animation/AnimationTree.set("parameters/MoveStateMachine/Idle/blend_position", direction_animation)
 		$Animation/AnimationTree.set("parameters/MoveStateMachine/Walk/blend_position", direction_animation)
+		$Animation/AnimationTree.set("parameters/BlendFishAnimation/blend_position", direction_animation)
 		for animation in Data.TOOL_STATE_ANIMATIONS.values():
 			var animation_name: String = "parameters/ToolStateMachine/" + animation + "/blend_position"
 			$Animation/AnimationTree.set(animation_name, direction_animation)
@@ -74,3 +80,18 @@ func _on_animation_tree_animation_finished(_anim_name: StringName) -> void:
 
 func day_change_emit():
 	day_change.emit()
+
+
+func start_fishing():
+	$FishingGame.reveal()
+	current_state = Enum.State.FISHING
+	$Animation/AnimationTree.set("parameters/FishBlend/blend_amount", 1)
+
+func stop_fishing():
+	can_move = true
+	current_state = Enum.State.DEFAULT
+	$Animation/AnimationTree.set("parameters/FishBlend/blend_amount", 0)
+
+func get_fishing_input():
+	if Input.is_action_just_pressed("action"):
+		$FishingGame.action()
