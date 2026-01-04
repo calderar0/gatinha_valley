@@ -3,6 +3,11 @@ extends Node2D
 var plant_scene = preload("res://scenes/objects/plant.tscn")
 var plant_info_scene = preload("res://scenes/ui/plant_info.tscn")
 var projectile_scene = preload("res://scenes/machines/projectile.tscn")
+var machine_scenes = {
+	Enum.Machine.SPRINKLER: preload("res://scenes/machines/sprinkler.tscn"),
+	Enum.Machine.SCARECROW: preload("res://scenes/machines/scarecrow.tscn"),
+	Enum.Machine.FISHER: preload("res://scenes/machines/fisher.tscn"),
+}
 var used_cells: Array[Vector2i]
 var raining: bool:
 	set(value):
@@ -13,6 +18,13 @@ var raining: bool:
 @onready var daytransition_material = $Overlay/CanvasLayer/DayTransitionLayer.material
 @export var daytime_color: Gradient
 @export var rain_color: Color
+
+const MACHINE_PREVIEW_TEXTURES = {
+	Enum.Machine.SPRINKLER: {'texture':preload("res://graphics/icons/sprinkler.png"), 'offset': Vector2i(0,0)},
+	Enum.Machine.FISHER: {'texture':preload("res://graphics/icons/fisher.png"), 'offset': Vector2i(0,-4)},
+	Enum.Machine.SCARECROW: {'texture':preload("res://graphics/icons/scarecrow.png"), 'offset': Vector2i(0,-4)},
+	Enum.Machine.DELETE: {'texture':preload("res://graphics/icons/delete.png"), 'offset': Vector2i(0,0)}}
+	
 
 func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 	var grid_coord: Vector2i = Vector2i(int(pos.x / Data.TILE_SIZE), int(pos.y / Data.TILE_SIZE))
@@ -62,6 +74,14 @@ func _on_player_diagnose() -> void:
 func _on_player_day_change() -> void:
 	day_restart()
 
+func _on_player_build(current_machine: int) -> void:
+	if current_machine != Enum.Machine.DELETE:
+		var machine = machine_scenes[current_machine].instantiate()
+		machine.setup(player.get_machine_coord(), self, $Objects)
+
+func _on_player_machine_change(current_machine: int) -> void:
+	$Overlay/MachinePreviewSprite.texture = MACHINE_PREVIEW_TEXTURES[current_machine]['texture']
+
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
 	$Objects/Scarecrow.connect("shoot_projectile", create_projectile)
@@ -70,6 +90,9 @@ func _process(_delta: float) -> void:
 	var daytimer_point = 1 - $Timers/DayLenghtTimer.time_left / $Timers/DayLenghtTimer.wait_time
 	var color = daytime_color.sample(daytimer_point).lerp(rain_color, 0.5 if raining else 0.0)
 	$Overlay/DaytimeColor.color = color
+	
+	$Overlay/MachinePreviewSprite.visible = player.current_state == Enum.State.BUILDING
+	$Overlay/MachinePreviewSprite.position = player.get_machine_coord() + MACHINE_PREVIEW_TEXTURES[player.current_machine]['offset']
 
 func day_restart():
 	var tween = create_tween()
