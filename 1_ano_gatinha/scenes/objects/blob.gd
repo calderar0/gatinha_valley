@@ -16,9 +16,10 @@ func _physics_process(_delta: float) -> void:
 	velocity = direction * speed + push_direction
 	move_and_slide()
 
-func push():
+func push(dir = Vector2.ZERO):
 	var tween = get_tree().create_tween()
-	var target = (player.position - position).normalized() * -1 * push_distance
+	var target_dir = dir if dir else (player.position - position).normalized()
+	var target = target_dir * -1 * push_distance if not dir else dir
 	tween.tween_property(self, "push_direction", target, 0.1)
 	tween.tween_property(self, "push_direction", Vector2.ZERO, 0.2)
 
@@ -27,8 +28,8 @@ func death():
 	$AnimationPlayer.current_animation = 'explode'
 	
 
-func hit(tool: Enum.Tool):
+func hit(tool: Enum.Tool, dir = Vector2.ZERO):
 	if tool == Enum.Tool.SWORD:
 		$Sprite2D.flash()
-		push()
+		push(dir)
 		health -= 1

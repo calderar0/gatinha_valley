@@ -2,6 +2,7 @@ extends Node2D
 
 var plant_scene = preload("res://scenes/objects/plant.tscn")
 var plant_info_scene = preload("res://scenes/ui/plant_info.tscn")
+var projectile_scene = preload("res://scenes/machines/projectile.tscn")
 var used_cells: Array[Vector2i]
 var raining: bool:
 	set(value):
@@ -63,6 +64,7 @@ func _on_player_day_change() -> void:
 
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
+	$Objects/Scarecrow.connect("shoot_projectile", create_projectile)
 
 func _process(_delta: float) -> void:
 	var daytimer_point = 1 - $Timers/DayLenghtTimer.time_left / $Timers/DayLenghtTimer.wait_time
@@ -94,3 +96,10 @@ func level_reset():
 
 func plant_death(coord: Vector2i):
 	used_cells.erase(coord)
+
+func create_projectile(start_pos: Vector2, dir: Vector2):
+	var projectile = projectile_scene.instantiate()
+	projectile.setup(start_pos, dir)
+	$Objects.add_child(projectile)
+	
+	
