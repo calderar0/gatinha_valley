@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp6jwa2lx4cv5"]
+
+[ext_resource type="Script" uid="uid://o3epbmrobjsu" path="res://scenes/machines/machine.gd" id="1_dpiym"]
+
+[node name="Machine" type="StaticBody2D"]
+script = ExtResource("1_dpiym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
