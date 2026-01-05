@@ -88,7 +88,6 @@ func _on_player_machine_change(current_machine: int) -> void:
 
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
-	$Objects/Scarecrow.connect("shoot_projectile", create_projectile)
 
 func _process(_delta: float) -> void:
 	var daytimer_point = 1 - $Timers/DayLenghtTimer.time_left / $Timers/DayLenghtTimer.wait_time
@@ -128,7 +127,6 @@ func create_projectile(start_pos: Vector2, dir: Vector2):
 	var projectile = projectile_scene.instantiate()
 	projectile.setup(start_pos, dir)
 	$Objects.add_child(projectile)
-	
 
 func water_plants(coord: Vector2i):
 	const SOIL_DIRECTIONS = [
@@ -139,7 +137,6 @@ func water_plants(coord: Vector2i):
 		var cell = coord + dir
 		if cell in $Layers/SoilLayer.get_used_cells():
 			$Layers/WaterSoilLayer.set_cell(cell, 0, Vector2i(randi_range(0,2),0))
-
 
 func _on_blob_timer_timeout() -> void:
 	var plants = get_tree().get_nodes_in_group("Plants")
