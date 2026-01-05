@@ -3,6 +3,7 @@ extends Node2D
 var plant_scene = preload("res://scenes/objects/plant.tscn")
 var plant_info_scene = preload("res://scenes/ui/plant_info.tscn")
 var projectile_scene = preload("res://scenes/machines/projectile.tscn")
+var blob_scene = preload("res://scenes/objects/blob.tscn")
 var machine_scenes = {
 	Enum.Machine.SPRINKLER: preload("res://scenes/machines/sprinkler.tscn"),
 	Enum.Machine.SCARECROW: preload("res://scenes/machines/scarecrow.tscn"),
@@ -78,6 +79,9 @@ func _on_player_build(current_machine: int) -> void:
 	if current_machine != Enum.Machine.DELETE:
 		var machine = machine_scenes[current_machine].instantiate()
 		machine.setup(player.get_machine_coord(), self, $Objects)
+	else:
+		for machine in get_tree().get_nodes_in_group('Machines'):
+			machine.delete(player.get_machine_coord() / 16)
 
 func _on_player_machine_change(current_machine: int) -> void:
 	$Overlay/MachinePreviewSprite.texture = MACHINE_PREVIEW_TEXTURES[current_machine]['texture']
@@ -125,4 +129,21 @@ func create_projectile(start_pos: Vector2, dir: Vector2):
 	projectile.setup(start_pos, dir)
 	$Objects.add_child(projectile)
 	
-	
+
+func water_plants(coord: Vector2i):
+	const SOIL_DIRECTIONS = [
+	Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1),
+	Vector2i(-1,  0),Vector2i(1,0), Vector2i(-1,  1), 
+	Vector2i(0,  1), Vector2i(1,  1)]
+	for dir in SOIL_DIRECTIONS:
+		var cell = coord + dir
+		if cell in $Layers/SoilLayer.get_used_cells():
+			$Layers/WaterSoilLayer.set_cell(cell, 0, Vector2i(randi_range(0,2),0))
+
+
+func _on_blob_timer_timeout() -> void:
+	var plants = get_tree().get_nodes_in_group("Plants")
+	if plants:
+		var blob = blob_scene.instantiate()
+		var pos = $BlobSpawnPositions.get_children().pick_random().position
+		blob.setup(pos, plants.pick_random(), $Objects)

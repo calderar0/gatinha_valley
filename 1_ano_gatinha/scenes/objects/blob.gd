@@ -9,12 +9,27 @@ var health:= 3:
 		health = value
 		if health <= 0:
 			death()
+var plant_target: StaticBody2D
+var active: bool = true
 @onready var player = get_tree().get_first_node_in_group('Player')
 
+func setup(start_pos, target, parent):
+	position = start_pos
+	parent.add_child(self)
+	plant_target = target
+	
+
 func _physics_process(_delta: float) -> void:
-	direction = (player.position - position).normalized()
-	velocity = direction * speed + push_direction
-	move_and_slide()
+	if plant_target:
+		direction = (plant_target.position - position).normalized()
+		velocity = direction * speed + push_direction
+		move_and_slide()
+		if position.distance_to(plant_target.position) < 10 and active:
+			plant_target.damage()
+			active = false
+			death()
+	else:
+		death()
 
 func push(dir = Vector2.ZERO):
 	var tween = get_tree().create_tween()

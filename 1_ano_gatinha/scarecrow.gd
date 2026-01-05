@@ -1,11 +1,14 @@
 extends Machine
 
 signal shoot_projectile(start_pos: Vector2, dir: Vector2)
+@export var max_range:= 150
 
 func _on_timer_timeout() -> void:
 	var blobs = get_tree().get_nodes_in_group("Blobs")
 	if blobs:
-		shoot_projectile.emit(position, (get_nearest_blob(blobs).position - position).normalized())
+		var nearest_blob = get_nearest_blob(blobs)
+		if nearest_blob.position.distance_to(position) < max_range:
+			shoot_projectile.emit(position, (nearest_blob.position - position).normalized())
 
 func get_nearest_blob(blobs: Array) -> CharacterBody2D:
 	var nearest = blobs[0]

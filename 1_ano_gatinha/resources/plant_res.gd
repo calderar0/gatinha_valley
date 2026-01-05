@@ -8,7 +8,10 @@ extends Resource
 @export var death_max: int = 3
 @export var name: String
 var age: float
-var death_count: int
+var death_count: int:
+	set(value):
+		death_count = value
+		emit_changed()
 var dead: bool:
 	set(value):
 		dead = value
@@ -36,3 +39,6 @@ func decay(plant: StaticBody2D):
 
 func get_complete():
 	return age >= h_frames
+
+func damage():
+	death_count += 1
