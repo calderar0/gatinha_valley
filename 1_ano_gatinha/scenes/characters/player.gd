@@ -17,6 +17,7 @@ signal diagnose
 signal day_change
 signal build(current_machine: Enum.Machine)
 signal machine_change(current_machine: Enum.Machine)
+signal close_shop
 
 func _physics_process(_delta: float) -> void:
 	match current_state:
@@ -31,6 +32,8 @@ func _physics_process(_delta: float) -> void:
 			get_building_input()
 			move()
 			animate()
+		Enum.State.SHOP:
+			get_shopping_input()
 	if direction:
 		last_direction = direction
 		var ray_y = int(direction.y) if not (direction.x) else 0
@@ -75,7 +78,7 @@ func get_basic_input():
 		diagnose.emit()
 	
 	if Input.is_action_just_pressed("style_toggle"):
-		current_style = posmod(current_style + 1, Enum.Style.size()) as Enum.Style
+		current_style = posmod(current_style + 1, Enum.Style.size() - 1) as Enum.Style
 		$Sprite2D.texture = Data.PLAYER_SKINS[current_style]
 	
 	if Input.is_action_just_pressed("build"):
@@ -84,17 +87,14 @@ func get_basic_input():
 func tool_use_emit():
 	tool_use.emit(current_tool, position + last_direction * 16 + Vector2(0,4))
 
-
 func _on_animation_tree_animation_started(_anim_name: StringName) -> void:
 	can_move = false
-
 
 func _on_animation_tree_animation_finished(_anim_name: StringName) -> void:
 	can_move = true
 
 func day_change_emit():
 	day_change.emit()
-
 
 func start_fishing():
 	$FishingGame.reveal()
@@ -122,6 +122,9 @@ func get_building_input():
 	if Input.is_action_just_pressed("action"):
 		build.emit(current_machine)
 
+func get_shopping_input():
+	if Input.is_action_just_pressed("ui_cancel"):
+		close_shop.emit()
 
 func get_machine_coord() -> Vector2i:
 	var pos = position + last_direction * 20 + Vector2(0,8)

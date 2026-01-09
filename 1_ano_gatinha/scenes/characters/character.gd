@@ -4,7 +4,10 @@ var player: CharacterBody2D
 
 @export var dialog: Array[String]
 @export var texture: Texture2D
+@export var shop_type: Enum.Shop
 var dialog_index: int
+
+signal open_shop(shop_type: Enum.Shop)
 
 func _ready() -> void:
 	$Sprite2D.texture = texture
@@ -34,3 +37,4 @@ func interact(player_character: CharacterBody2D):
 	else:
 		$Dialog.hide()
 		dialog_index = 0
+		open_shop.emit(shop_type)

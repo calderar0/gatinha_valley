@@ -42,42 +42,52 @@ const PLANT_DATA = {
 		'death_max': 3,
 		'reward': Enum.Item.WHEAT}}
 const MACHINE_UPGRADE_COST = {
+	Enum.Machine.DELETE: {},
 	Enum.Machine.SPRINKLER: {
 		'name': 'Sprinkler',
 		'cost' :{Enum.Item.TOMATO: 30, Enum.Item.WHEAT: 20},
-		'icon': preload("res://graphics/icons/sprinkler.png")},
+		'icon': preload("res://graphics/icons/sprinkler.png"),
+		'color': Color.SEA_GREEN},
 	Enum.Machine.FISHER: {
-		'name': 'Sprinkler',
+		'name': 'Fisher',
 		'cost' :{Enum.Item.WOOD: 25, Enum.Item.FISH: 15},
-		'icon': preload("res://graphics/icons/fisher.png")},
+		'icon': preload("res://graphics/icons/fisher.png"),
+		'color': Color.SLATE_GRAY},
 	Enum.Machine.SCARECROW: {
-		'name': 'Sprinkler',
+		'name': 'Scarecrow',
 		'cost' : {Enum.Item.PUMPKIN: 15, Enum.Item.CORN: 15},
-		'icon': preload("res://graphics/icons/scarecrow.png")}}
+		'icon': preload("res://graphics/icons/scarecrow.png"),
+		'color': Color.BURLYWOOD}}
 const HOUSE_COST = {
 	1: {Enum.Item.WOOD: 30, Enum.Item.APPLE: 20},
 	2: {Enum.Item.WOOD: 40, Enum.Item.APPLE: 30}}
 const STYLE_UPGRADES = {
+	Enum.Style.BASIC: {},
 	Enum.Style.COWBOY: {
 		'name': 'Cowboy',
-		'cost':{Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6},
-		'icon': preload("res://graphics/icons/cowboy.png")},
+		'cost':{Enum.Item.WOOD: 8, Enum.Item.CORN: 6},
+		'icon': preload("res://graphics/icons/cowboy.png"),
+		'color': Color.SANDY_BROWN},
 	Enum.Style.ENGLISH: {
 		'name': 'Oldie',
-		'cost':{Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6},
-		'icon': preload("res://graphics/icons/english.png")},
+		'cost':{Enum.Item.CORN: 8, Enum.Item.WHEAT: 6},
+		'icon': preload("res://graphics/icons/english.png"),
+		'color': Color.LIGHT_GRAY},
 	Enum.Style.BASEBALL: {
 		'name': 'Baseball',
-		'cost':{Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6},
-		'icon': preload("res://graphics/icons/blue.png")},
+		'cost':{Enum.Item.TOMATO: 8, Enum.Item.APPLE: 6},
+		'icon': preload("res://graphics/icons/blue.png"),
+		'color': Color.SKY_BLUE},
 	Enum.Style.BEANIE: {
 		'name': 'Beanie',
-		'cost':{Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6},
-		'icon': preload("res://graphics/icons/beanie.png")},
+		'cost':{Enum.Item.APPLE: 8, Enum.Item.WHEAT: 6},
+		'icon': preload("res://graphics/icons/beanie.png"),
+		'color': Color.INDIAN_RED},
 	Enum.Style.STRAW: {
 		'name': 'Straw',
-		'cost':{Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6},
-		'icon': preload("res://graphics/icons/straw.png")}}
+		'cost':{Enum.Item.FISH: 8, Enum.Item.WOOD: 6},
+		'icon': preload("res://graphics/icons/straw.png"),
+		'color': Color.BEIGE}}
 const TOOL_STATE_ANIMATIONS = {
 	Enum.Tool.HOE: 'Hoe',
 	Enum.Tool.AXE: 'Axe',
@@ -89,3 +99,9 @@ const TOOL_STATE_ANIMATIONS = {
 
 
 var forecast_rain: bool
+var unlocked_styles: Array = [Enum.Style.BASIC, Enum.Style.ENGLISH]
+var unlocked_machines: Array = [Enum.Machine.DELETE]
+var shop_connection = {
+	Enum.Shop.HAT: {'tracker': unlocked_styles, 'all': STYLE_UPGRADES.keys()},
+	Enum.Shop.MAIN: {'tracker': unlocked_machines, 'all': MACHINE_UPGRADE_COST.keys()}
+}
