@@ -51,15 +51,23 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 		
 		Enum.Tool.SEED:
 			if has_soil and grid_coord not in used_cells:
-				var plant_res = PlantResource.new()
-				plant_res.setup(player.current_seed)
-				var plant = plant_scene.instantiate()
-				plant.setup(grid_coord, $Objects, plant_res, plant_death)
-				used_cells.append(grid_coord)
-				
-				var plant_info  = plant_info_scene.instantiate()
-				plant_info.setup(plant_res)
-				$Overlay/CanvasLayer/PlantInfoContainer.add(plant_info)
+				var selected_item = {
+					Enum.Seed.TOMATO: Enum.Item.TOMATO,
+					Enum.Seed.WHEAT: Enum.Item.WHEAT,
+					Enum.Seed.CORN: Enum.Item.CORN,
+					Enum.Seed.PUMPKIN: Enum.Item.PUMPKIN,
+				}[player.current_seed]
+				if Data.items[selected_item] > 0:
+					Data.change_item(selected_item, -1)
+					var plant_res = PlantResource.new()
+					plant_res.setup(player.current_seed, selected_item)
+					var plant = plant_scene.instantiate()
+					plant.setup(grid_coord, $Objects, plant_res, plant_death)
+					used_cells.append(grid_coord)
+					
+					var plant_info  = plant_info_scene.instantiate()
+					plant_info.setup(plant_res)
+					$Overlay/CanvasLayer/PlantInfoContainer.add(plant_info)
 				
 		Enum.Tool.AXE, Enum.Tool.SWORD:
 			for object in get_tree().get_nodes_in_group('Objects'):

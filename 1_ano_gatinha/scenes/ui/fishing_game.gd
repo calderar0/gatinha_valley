@@ -46,4 +46,5 @@ func _on_fish_update_timer_timeout() -> void:
 func _on_texture_progress_bar_value_changed(value: float) -> void:
 	if value <= 0 or value >= 100:
 		hide()
+		Data.change_item(Enum.Item.FISH, 1 if value >= 100 else 0)
 		get_parent().stop_fishing()

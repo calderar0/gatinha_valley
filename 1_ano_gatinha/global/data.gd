@@ -105,3 +105,18 @@ var shop_connection = {
 	Enum.Shop.HAT: {'tracker': unlocked_styles, 'all': STYLE_UPGRADES.keys()},
 	Enum.Shop.MAIN: {'tracker': unlocked_machines, 'all': MACHINE_UPGRADE_COST.keys()}
 }
+
+
+var items = {
+	Enum.Item.WOOD: 99,
+	Enum.Item.APPLE: 99,
+	Enum.Item.FISH: 99,
+	Enum.Item.CORN: 0,
+	Enum.Item.WHEAT: 99,
+	Enum.Item.PUMPKIN: 99,
+	Enum.Item.TOMATO: 99}
+
+
+func change_item(item: Enum.Item, amount:int = 1):
+	items[item] += amount
+	get_tree().get_first_node_in_group("ResourceUI").reveal()

@@ -3,6 +3,7 @@ extends Button
 var item_enum
 var shop_type: Enum.Shop
 var unlock: Array
+var source
 const ICON_PATHS = {
 	Enum.Item.WOOD: "res://graphics/icons/wood.png",
 	Enum.Item.FISH: "res://graphics/icons/goldfish.png",
@@ -18,7 +19,7 @@ func setup(new_shop_type, new_item_enum, parent):
 	item_enum = new_item_enum
 	shop_type = new_shop_type
 	parent.add_child(self)
-	var source = Data.STYLE_UPGRADES if shop_type == Enum.Shop.HAT else Data.MACHINE_UPGRADE_COST
+	source = Data.STYLE_UPGRADES if shop_type == Enum.Shop.HAT else Data.MACHINE_UPGRADE_COST
 	var data =  source[item_enum]
 	unlock = Data.unlocked_machines if shop_type == Enum.Shop.MAIN else Data.unlocked_styles
 	$VBoxContainer/VBoxContainer/Label.text = data['name']
@@ -41,5 +42,11 @@ func _on_focus_exited() -> void:
 
 
 func _on_pressed() -> void:
-	unlock.append(item_enum)
-	press.emit(shop_type)
+	var cost_enums = source[item_enum]['cost'].keys()
+	var cost_values = source[item_enum]['cost'].values()
+	
+	if Data.items[cost_enums[0]] > cost_values[0] and Data.items[cost_enums[1]] > cost_values[1]:
+		Data.change_item(cost_enums[0], -cost_values[0])
+		Data.change_item(cost_enums[1], -cost_values[1])
+		unlock.append(item_enum)
+		press.emit(shop_type)

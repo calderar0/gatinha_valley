@@ -10,6 +10,7 @@ var health := 3:
 			shape.size = Vector2(12,6)
 			$CollisionShape2D.shape = shape
 			$CollisionShape2D.position.y = 8
+			Data.change_item(Enum.Item.WOOD, randi_range(2,4))
 
 func _ready() -> void:
 	$Sprite2D.frame = [0,1].pick_random()
@@ -34,6 +35,7 @@ func create_apple(num: int):
 func get_apple():
 	if $Apples.get_children():
 		$Apples.get_children().pick_random().queue_free()
+		Data.change_item(Enum.Item.APPLE)
 
 func reset():
 	if health > 0:

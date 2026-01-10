@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 	$Control/TextureProgressBar.value = progress
 
 func _on_timer_timeout() -> void:
+	Data.change_item(Enum.Item.FISH)
 	start_fishing()
 
 func start_fishing():
