@@ -8,6 +8,7 @@ var player: CharacterBody2D
 @export var shop_type: Enum.Shop
 @export var vframe: int
 @export var has_fin_animation: bool
+@export var npc: bool = true
 var dialog_index: int
 
 signal open_shop(shop_type: Enum.Shop)
@@ -49,4 +50,7 @@ func interact(player_character: CharacterBody2D):
 		else:
 			$Dialog.hide()
 			dialog_index = 0
-			open_shop.emit(shop_type)
+			if npc:
+				open_shop.emit(shop_type)
+				get_tree().get_first_node_in_group('ResourceUI').reveal(false)
+	

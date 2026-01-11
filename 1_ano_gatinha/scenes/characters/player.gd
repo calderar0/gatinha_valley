@@ -13,6 +13,13 @@ var current_style: Enum.Style
 var current_machine: Enum.Machine
 var current_style_index: int
 var current_machine_index: int
+@onready var tool_sounds = {
+	Enum.Tool.AXE: $Sounds/Axe,
+	Enum.Tool.SWORD: $Sounds/Axe,
+	Enum.Tool.FISH: $Sounds/Fish,
+	Enum.Tool.HOE: $Sounds/Hoe,
+	Enum.Tool.WATER: $Sounds/Water,
+}
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
 signal diagnose
@@ -40,6 +47,10 @@ func _physics_process(_delta: float) -> void:
 		last_direction = direction
 		var ray_y = int(direction.y) if not (direction.x) else 0
 		$RayCast2D.target_position = Vector2(direction.x,ray_y).normalized() * 20
+		if not $Sounds/StepTimer.time_left:
+			$Sounds/StepTimer.start()
+	else:
+		$Sounds/StepTimer.stop()
 
 func move():
 	direction = Input.get_vector("left","right","up","down")
@@ -64,6 +75,7 @@ func get_basic_input():
 		var dir = Input.get_axis("tool_backward","tool_forward")
 		current_tool = posmod(current_tool + int(dir), Enum.Tool.size()) as Enum.Tool
 		$ToolUI.reveal(true)
+		get_tree().get_first_node_in_group('ResourceUI').visible = current_tool == Enum.Tool.SEED
 
 	if Input.is_action_just_pressed("seed_forward"):
 		current_seed = posmod(current_seed + 1, Enum.Seed.size()) as Enum.Seed
@@ -90,6 +102,8 @@ func get_basic_input():
 
 func tool_use_emit():
 	tool_use.emit(current_tool, position + last_direction * 16 + Vector2(0,4))
+	if current_tool != Enum.Tool.SEED:
+		tool_sounds[current_tool].play()
 
 func _on_animation_tree_animation_started(_anim_name: StringName) -> void:
 	can_move = false
@@ -130,6 +144,7 @@ func get_building_input():
 func get_shopping_input():
 	if Input.is_action_just_pressed("ui_cancel"):
 		close_shop.emit()
+		get_tree().get_first_node_in_group('ResourceUI').hide()
 
 func get_machine_coord() -> Vector2i:
 	var pos = position + last_direction * 20 + Vector2(0,8)
@@ -137,3 +152,7 @@ func get_machine_coord() -> Vector2i:
 	coord.x += -1 if pos.x < 0 else 0
 	coord.y += -1 if pos.y < 0 else 0
 	return  coord * Data.TILE_SIZE + Vector2i(8,8)
+
+
+func _on_step_timer_timeout() -> void:
+	$Sounds/Step.play()

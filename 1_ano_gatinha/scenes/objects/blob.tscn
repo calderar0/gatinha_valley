@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://utpavsu3xivh"]
+[gd_scene load_steps=12 format=3 uid="uid://utpavsu3xivh"]
 
 [ext_resource type="Script" uid="uid://c5twlq5esj8pk" path="res://scenes/objects/blob.gd" id="1_3y2e6"]
 [ext_resource type="PackedScene" uid="uid://c4mpkmfufphgb" path="res://scenes/vxf/flash_sprite_2d.tscn" id="2_eba5w"]
 [ext_resource type="Shader" uid="uid://fvi37maewcxc" path="res://shaders/flash.tres" id="3_vg2cp"]
 [ext_resource type="Texture2D" uid="uid://b466fqj7w4mne" path="res://graphics/characters/blob.png" id="4_ckn0h"]
+[ext_resource type="AudioStream" uid="uid://ca7wu5nswwv0y" path="res://audio/slime.ogg" id="5_eba5w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vcmgo"]
 resource_local_to_scene = true
@@ -58,6 +59,21 @@ tracks/1/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_eba5w")
+}],
+"times": PackedFloat32Array(0.8333333)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_f1v85"]
 resource_name = "move"
@@ -101,3 +117,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_00t3g")
 }
 autoplay = "move"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

@@ -46,7 +46,7 @@ func _on_pressed() -> void:
 	var cost_values = source[item_enum]['cost'].values()
 	
 	if Data.items[cost_enums[0]] > cost_values[0] and Data.items[cost_enums[1]] > cost_values[1]:
-		Data.change_item(cost_enums[0], -cost_values[0])
-		Data.change_item(cost_enums[1], -cost_values[1])
+		Data.change_item(cost_enums[0], -cost_values[0],false)
+		Data.change_item(cost_enums[1], -cost_values[1],false)
 		unlock.append(item_enum)
 		press.emit(shop_type)

@@ -24,3 +24,9 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
+
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="HideTimer" to="." method="hide"]

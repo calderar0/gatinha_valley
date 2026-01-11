@@ -19,3 +19,4 @@ func reveal(shop_type: Enum.Shop = Enum.Shop.HAT):
 		$GridContainer.get_child(0).grab_focus()
 	else:
 		close.emit()
+		get_tree().get_first_node_in_group('ResourceUI').hide()
