@@ -1,0 +1,175 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6h35vw1oiq3h"]
+
+[ext_resource type="Script" uid="uid://dmi5bncfvwqxi" path="res://scenes/ui/carta.gd" id="1_j1mxw"]
+[ext_resource type="Theme" uid="uid://dxm4akrrww7cx" path="res://scenes/ui/game_theme.tres" id="1_rey4q"]
+[ext_resource type="Texture2D" uid="uid://cufccts2vhufa" path="res://graphics/icons/goldfish.png" id="3_dknh3"]
+[ext_resource type="Texture2D" uid="uid://fnmyohadow27" path="res://graphics/icons/delete.png" id="4_dknh3"]
+
+[node name="Carta" type="Control" groups=["Carta"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j1mxw")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rey4q")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_colors/default_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+text = "	Oi gatinha, tudo bem? Sou eu seu gatinho :)
+	Primeiramente, FELIZ 1 ANO DE NAMORO, eu te amo muito  muito mesmo!!! Sou muito feliz com você, obrigado por tudo...
+	Segundamente, deixa eu te explicar o que seria tudo isso...
+Eu queria te dar um presente legal, queria te dar algo que você gostasse mas não sabia o que... Fiquei pensando um tanto sobre isso, aí cheguei na conclusão que queria te dar um jogo que você pudesse gostar, parecido com um jogo que você gosta, daí o Stardew Valley :) (só que o meu tem alguns bugs e não tem mt o que fazer kkkkk, mas eu fiz com amor e pensando em você...).
+	Enquanto eu fazia o jogo, eu parei e pensei \"caramba isso aqui nem faz sentido, que presente esquisito pra 1 ano de namoro, eu sou mt estranho e bosta mesmo né...\", mas mesmo assim eu quis continuar sabe, eu ainda acho que de certa forma é legal. Eu queria impliementar mais coisas mas enfim.
+	Acho que vou aproveitar essa cartinha aqui pra poder me extender um pouco mais do que na carta fisica rsrs...
+Tanto pra dizer, tanto pra passar, tanto pra expressar, tanto pra te amar... Não sei por onde começar pra ser sincero...
+
+"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_colors/default_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+text = "	O meu eu de algum tempo atrás jamais poderia imaginar o caminho que minha vida ia tomar, e eu to muito feliz que ela tenha tomado o caminho que tomou...
+	Desde o momento que te conheci, até hoje, passei (e espero continuar passando até o fim da minha vida) ao seu lado muitos momentos, momentos que nunca esperava e que foram e continuam sendo incríveis... Cada ano, cada mês, cada semana, cada dia, cada hora, cada minuto, cada segundo... Todos eles foram momentos que me fizeram e me fazem feliz... Eu te amo muito e espero que saiba disso.
+	E que sorte a minha poder viver a vida ao seu lado esse último ano, espero que seja o primeiro dos infinitos próximos que virão... Que sorte a minha minha namorada ser tão incrível, maravilhosa, perfeita, magnífica, bonita, engraçada, inteligente, esforçada, sexy, sensual, gostosa, divertida, se preocupa comigo, atenciosa... Simplesmente perfeita. Obrigado por existir Gatinha.
+	Vou me extender um pouquinho aqui se vc me permite rsrs... Talvez dê algumas páginas e talvez eu me perca, mas saiba que te escrevo com todo meu coração pra tentar expressar um pouco do quanto te amo e do quanto você importa pra mim, desde o começo de tudo..."
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_colors/default_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+text = "	Não sei se sabe ou se ja percebeu, mas sou muito contemplativo as vezes, muitas vezes gosto de me lembrar de memórias... Mesmo não tirando muitas fotos igual você faz, eu tenho uma forma de fazer igual, na minha cabeça. Me recordo de ambientes, cheiros, olhares, flashes, momentos, pensamentos, tudo... Sinceramente tenho bastante medo de perder isso tudo... meio que é o que me mantém no chão (e as vezes tira também).
+	Enfim, esse um ano foi bem rápido, tão rápido que minha nossa, os momentos que guardei parecem todos em sequência, como se não tivesse tido pausa, e isso é bem legal na real kkkkk.
+	Parece que foi ontem que tudo começou, parece que foi ontem que tava lá eu pensando \"acho que ela me acha esquisito e me odeia\", depois de vc recusar meu abraço no primeiro ano kkkkkk.
+	Parece que foi ontem que eu tava deitado na minha cama com o coração na mão te falando o que sentia por você. 
+	Parece que foi ontem que eu tava na sua casa deitado com você preocupado por como você tava e pensando \"queria poder fazer mais\" e ao mesmo tempo pensando \"o que nós dois somos?\".
+Parece que foi ontem que no dia seguinte eu criei coragem e te chamei pra sair."
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_colors/default_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+text = "	Parece que foi ontem que eu saí com você e tive um dos dias mais incríveis da minha vida.
+	Parece que foi ontem que a gente deu o primeiro beijo (talvez dormindo rsrs).
+	Parece que foi ontem que você falou eu te amo pela primeira vez (e primeiro que eu também).
+	Parece que foi ontem que te pedi em namoro e você disse sim.
+	Parece que todos os nossos dias juntos, encontros, saídas, conversas, gameplays, estudos foram ontem.
+	Mas já tem 1 ano que muitas coisas aconteceram e continuam aconecendo... 1 ano sendo feliz com você dizendo que me ama e amando minha melhor amiga e companheira.
+	Minha felicidade ao seu lado começou em 2023, quando começamos amigos  e eu sou muito feliz que nosso destino tenha se encontrado naquele momento, 2023 foi muito especial, ter você (mesmo que não éramos tão próximos) foi muito bom, nós jogamos, conversamos, estudamos, rimos...
+	Em 2024 nós já eramos mais amigos, (eu ja tinha me declarado de forma bem bosta rsrs) mas mesmo assim você continuou sendo minha amiga e eu fiquei muito feliz de não te perder...
+	Em 2025 demos o upgrade no relacionamento, mas, eu espero"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_colors/default_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+text = "que você saiba que, desde o começo, desde o primeiro dia, quando te vi no grupo de calouros, lá em 2023 e por algum motivo eu senti que você seria especial e diferente de alguma forma, quando te vi na minha sala e pensei \"caramba olha a menina do grupo ali\", quando o Marquinhos (salve Marcos, sei que vc me odeia, mas sou muito grato por você, talvez se não fosse por ele, eu não teria falado com você nem com a Isa, que hoje são pessoas muito especiais pra mim...) juntou nosso trio pela primeira vez... desde o começo você é muito especial pra mim, sempre me fez rir e mesmo que pra você, você não tenha feito nada, ainda assim você me salvou desde o começo, desde aquele dia da sala da biblioteca, quando nos falamos pela primeira vez (acho que eu não falei muito na época, eu tenho vergonha) você me salva todos os dias... Obrigado gatinha.
+	Eu só não imaginava que eu iria desenvolver um sentimento romântico por você, isso foi bem inesperado pra mim, eu tinha na minha cabeça que não sentiria mais nada por ninguém, mas fazer oq, minha namorada é incrível né... impossível não se apaixonar. Mesmo que na minha cabeça eu não fosse me apaixonar por ninguém, me apaixonei :D e que bom que me apaixonei por você, te amo gatinha."
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_rey4q")
+theme_override_colors/default_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+text = "	Enfim... muito texto, me perdi um pouco rsrsrs... desculpa.
+	Espero que eu tenha conseguido expressar um pouco pra você o quanto você é importante pra mim, desde o começo da nossa amizade...
+	Tenho que agradecer algumas pessoas que estiveram no trajeto até chegarmos aqui, comemorando um ano  de namoro...
+ 	O Marcos como ja disse, por ter (mesmo que sem querer) apresentado minha melhor amiga e futura namorada pra mim...
+	A Isa por ter me feito criar coragem e te falar o que sentia (mesmo que em um timing bem merda rsrs).
+	E alguns outros amigos que participaram de perto da trajetória também...
+	Mas além de todos, a pessoa que eu mais tenho que agradecer é você, meu amor... Obrigado por ser essa pessoa maravilhosa que você é, obrigado por fazer parte da minha trajetória e estar ao meu lado todos os dias, obrigado por me amar, obrigado por me permitir te amar ao seu lado, obrigado por existir meu amor.
+	Vou deixar pra escrever um pouco na carta.
+	Novamente, obrigado por tudo Gatinha, obrigado por existir.
+	Eu te amo Bianca Valenciani, te amo intensamente e infinitamente."
+
+[node name="TextureButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = 228.0
+offset_right = -220.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_dknh3")
+stretch_mode = 5
+
+[node name="TextureButton2" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 215.0
+offset_top = 228.0
+offset_right = 255.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_dknh3")
+stretch_mode = 5
+flip_h = true
+
+[node name="TextureButton3" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 228.0
+offset_right = 20.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_dknh3")
+stretch_mode = 5
+
+[connection signal="pressed" from="Control/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Control/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="Control/TextureButton3" to="." method="_on_texture_button_3_pressed"]
